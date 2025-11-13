@@ -52,7 +52,8 @@ class InvertedIndex:
                     
                     self.doc_count += 1
         
+        # We added time to see whos computer is faster, might be fun for you!
         duration = time.time() - start_time
         print(f"Index construction complete.")
-        print(f"  - Processed {self.doc_count} documents in {duration:.2f} seconds.") # Should be ~242,918
+        print(f"  - Processed {self.doc_count} documents in {duration:.2f} seconds.") 
         print(f"  - Vocabulary size: {len(self.index)} terms.")

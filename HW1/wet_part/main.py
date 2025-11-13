@@ -13,11 +13,11 @@ def main():
     output_path_2 = 'Part_2.txt'
     output_path_3 = 'Part_3.txt'
 
-    # --- Part 1: Build the Inverted Index ---
+    #  Part 1: Build the Inverted Index 
     indexer = InvertedIndex()
     indexer.create_index(data_path)
 
-    # --- Part 2: Boolean Retrieval ---
+    #  Part 2: Boolean Retrieval 
     print("\nStarting Boolean retrieval...")
     retriever = BooleanRetriever(indexer)
     try:
@@ -34,7 +34,7 @@ def main():
             f_out.write(' '.join(results) + '\n')
     print(f"Boolean retrieval complete. Results saved to '{output_path_2}'")
 
-    # --- Part 3: Collection Statistics ---
+    #  Part 3: Collection Statistics 
     print("\nStarting collection statistics analysis...")
     analyzer = CollectionAnalyzer(indexer, retriever)
     analyzer.generate_report(output_path_3)

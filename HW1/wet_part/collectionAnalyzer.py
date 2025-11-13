@@ -15,26 +15,26 @@ class CollectionAnalyzer:
     def generate_report(self, output_path):
         """
         Generates and writes the full statistics report to the specified file,
-        with analysis customized to the actual results.
+        with analysis customized to the actual results we found.
         """
-        # --- Find the required statistics before writing the file ---
+        #  Find the required statistics before writing the file 
         top_10 = heapq.nlargest(10, self.doc_freq.items(), key=lambda item: item[1])
         bottom_10 = heapq.nsmallest(10, self.doc_freq.items(), key=lambda item: item[1])
         # The heuristic will find the 'turco'/'licari' pair or a similar one.
         pair_info = self._find_cooccurring_pair()
 
         with open(output_path, 'w') as f:
-            # --- Section 3.1: Top 10 Highest Document Frequency ---
+            #  Section 3.1: Top 10 Highest Document Frequency 
             f.write("1. Write the top 10 terms with the highest document frequency:\n")
             for term, freq in top_10:
                 f.write(f"  {term}: {freq}\n")
             
-            # --- Section 3.2: Top 10 Lowest Document Frequency ---
+            #  Section 3.2: Top 10 Lowest Document Frequency 
             f.write("\n2. Write the top 10 terms with the lowest document frequency:\n")
             for term, freq in bottom_10:
                 f.write(f"  {term}: {freq}\n")
             
-            # --- Section 3.3: Explanation of Characteristics ---
+            #  Section 3.3: Explanation of Characteristics 
             f.write("\n3. Explain the different characteristics of the above two sets of terms:\n")
             f.write("  Characteristics of the highest frequency terms:\n")
             f.write("  The terms with the highest document frequency are classic stopwords. This list includes articles ('the', 'a'), prepositions ('of', 'in', 'to', 'for', 'on'), and conjunctions ('and'). These words form the grammatical backbone of the English language but carry almost no semantic meaning for information retrieval. Their presence in nearly every document (e.g., 'the' is in 242,067 of ~242,918 documents) makes them completely non-discriminative. The term 'said' is also extremely common, reflecting the journalistic nature of the AP news corpus. In most search systems, these words would be filtered out during preprocessing to save space and improve performance.\n")
@@ -42,7 +42,7 @@ class CollectionAnalyzer:
             f.write("\n  Characteristics of the lowest frequency terms:\n")
             f.write("  The terms with the lowest frequency (appearing in only one document) are highly specific and thus have maximum discriminative power. This list consists of proper nouns that are likely names of people or places ('enroth', 'nachnani', 'cullar'), unique compound words ('powerpraying', 'ogdenarea'), and potential misspellings ('figher', 'installtions'). A query containing one of these terms would be extremely precise, likely returning the single document in which it appears. Their rarity makes them highly valuable for targeted searches.\n")
 
-            # --- Section 3.4: Finding and Detailing a Co-occurring Pair ---
+            #  Section 3.4: Finding and Detailing a Co-occurring Pair 
             f.write("\n4. Find two terms with similar document frequencies that also appear in the same documents. Provide details.\n")
             if pair_info:
                 t1, t2, freq, overlap = pair_info

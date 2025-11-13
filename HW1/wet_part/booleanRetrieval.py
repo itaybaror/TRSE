@@ -56,11 +56,11 @@ class BooleanRetriever:
                 p1 = stack.pop()
                 
                 if token.upper() == 'AND':
-                    # Optimization: intersect smaller list into larger one.
+                    # We found a good optimization to intersect smaller list into larger one.
                     result = self._intersect(p1, p2) if len(p1) < len(p2) else self._intersect(p2, p1)
                 elif token.upper() == 'OR':
                     result = self._union(p1, p2)
-                elif token.upper() == 'NOT': # Treated as AND NOT
+                elif token.upper() == 'NOT': # Treated as AND NOT (HW Says)
                     result = self._and_not(p1, p2)
                 stack.append(result)
             else:
