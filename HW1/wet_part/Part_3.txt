@@ -24,13 +24,16 @@
 
 3. Explain the different characteristics of the above two sets of terms:
   Characteristics of the highest frequency terms:
-  The terms with the highest document frequency are classic stopwords. This list includes articles ('the', 'a'), prepositions ('of', 'in', 'to', 'for', 'on'), and conjunctions ('and'). These words form the grammatical backbone of the English language but carry almost no semantic meaning for information retrieval. Their presence in nearly every document (e.g., 'the' is in 242,067 of ~242,918 documents) makes them completely non-discriminative. The term 'said' is also extremely common, reflecting the journalistic nature of the AP news corpus. In most search systems, these words would be filtered out during preprocessing to save space and improve performance.
+  The terms with the highest document frequency are classic stopwords. This list includes articles ('the', 'a'), prepositions ('of', 'in', 'to', 'for', 'on'), and conjunctions ('and'). 
+ These words form the grammatical backbone of the English language but carry almost no semantic meaning for information retrieval. Their presence in nearly every document (e.g., 'the' is in 242,067 of ~242,918 documents) makes them completely non-discriminative. 
+The term 'said' is also extremely common, reflecting the journalistic nature of the AP news corpus. In most search systems, these words would be filtered out during preprocessing to save space and improve performance.
 
   Characteristics of the lowest frequency terms:
-  The terms with the lowest frequency (appearing in only one document) are highly specific and thus have maximum discriminative power. This list consists of proper nouns that are likely names of people or places ('enroth', 'nachnani', 'cullar'), unique compound words ('powerpraying', 'ogdenarea'), and potential misspellings ('figher', 'installtions'). A query containing one of these terms would be extremely precise, likely returning the single document in which it appears. Their rarity makes them highly valuable for targeted searches.
+  The terms with the lowest frequency (appearing in only one document) are highly specific and thus have maximum discriminative power. 
+ This list consists of proper nouns that are likely names of people or places ('enroth', 'nachnani', 'cullar'), unique compound words ('powerpraying', 'ogdenarea'), and potential misspellings ('figher', 'installtions'). A query containing one of these terms would be extremely precise, likely returning the single document in which it appears. Their rarity makes them highly valuable for targeted searches.
 
 4. Find two terms with similar document frequencies that also appear in the same documents. Provide details.
-  - Terms: A pair found is 'turco' and 'licari'.
+  - Terms: A pair found is 'licari' and 'turco'.
 
   - Document Frequencies: Both terms have an identical document frequency of 50. This places them in a mid-frequency range, making their strong co-occurrence statistically significant.
 
@@ -39,7 +42,9 @@
       AP891212-0239
       AP891212-0240
 
-  - Term Characteristics: The terms 'turco' and 'licari' likely represent last names of individuals who were frequently mentioned together in news reports, such as figures in a legal case, business partners, or political associates. Their very high co-occurrence rate (43 out of 50 documents, which is over 80%) is a strong signal that they are not independent but are part of a recurring named entity. Discovering such relationships is a key task in information retrieval and text mining.
+  - Term Characteristics: The terms 'licari' and 'turco' likely represent last names of individuals who were frequently mentioned together in news reports, such as figures in a legal case, business partners, or political associates. 
+ Their very high co-occurrence rate (43 out of 50 documents, which is over 80%) is a strong signal that they are not independent but are part of a recurring named entity. Discovering such relationships is a key task in information retrieval and text mining.
 
   - How these terms were found:
-    To find this pair efficiently, the algorithm first grouped all terms by their document frequency. It then focused its search on a medium-frequency range (DF between 50 and 100) to find terms that are neither ubiquitous nor extremely rare. By iterating only through pairs of terms that shared the exact same frequency, and then computing the intersection of their postings lists, the algorithm could identify this pair with a high co-occurrence rate without performing a slow, brute-force search across the entire vocabulary.
+    To find this pair efficiently, the algorithm first grouped all terms by their document frequency. It then focused its search on a medium-frequency range (DF between 50 and 100) to find terms that are neither ubiquitous nor extremely rare. 
+ By iterating only through pairs of terms that shared the exact same frequency, and then computing the intersection of their postings lists, the algorithm could identify this pair with a high co-occurrence rate without performing a slow, brute-force search across the entire vocabulary.
